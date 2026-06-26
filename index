@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TexType | Math & Science LaTeX Typesetting Services</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Modern CSS Reset & Variable Definitions */
+        :root {
+            --bg-main: #060d0a;       /* Deepest forest black */
+            --bg-surface: #0c1814;    /* Dark emerald-tinted surface */
+            --bg-card: #12241e;       /* Medium emerald card background */
+            --primary: #10b981;      /* Vibrant mint/emerald highlight */
+            --primary-glow: rgba(16, 185, 129, 0.15);
+            --text-main: #f3f4f6;     /* Off-white primary text */
+            --text-muted: #9ca3af;    /* Slate gray supporting text */
+            --text-accent: #a7f3d0;   /* Light mint for secondary highlights */
+            --border: #1b352b;        /* Soft geometric borders */
+            --font-heading: 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+              /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Ambient Glow Effects (Decorative background elements) */
+        .glow-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(0,0,0,0) 70%);
+            top: -100px;
+            right: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(6, 13, 10, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        /* Modern LaTeX formatting look for the logo */
+        .logo-sub {
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: "Times New Roman", serif;
+            font-style: italic;
+            border: 1px solid var(--border);
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.03);
+            margin-left: 8px;
+            color: var(--text-accent);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+            margin-left: 2rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10rem 2rem 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            max-width: 800px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #ffffff 40%, #a7f3d0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: var(--bg-main);
+            font-weight: 600;
+            padding: 0.85rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.25);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(16, 185, 129, 0.4);
+            background: #34d399;
+        }
+
+        /* Core Grid Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .grid-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title svg {
+            color: var(--primary);
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Restrictions / Scope Panel */
+        .restrictions-panel {
+            background: linear-gradient(180deg, rgba(18, 36, 30, 0.4) 0%, rgba(6, 13, 10, 0.4) 100%);
+            border: 1px dashed rgba(156, 163, 175, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+        }
+
+        .restrictions-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f3f4f6;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .restrictions-panel p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* Portfolio / Samples Area */
+        .samples-header {
+            text-align: center;
+            margin: 4rem 0 2.5rem 0;
+        }
+
+        .samples-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .samples-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .sample-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 140px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        
+
+        .sample-box:hover {
+            transform: translateY(-4px);
+            background: var(--bg-card);
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 1px 1px var(--primary-glow);
+        }
+
+        .sample-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .sample-title {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+            line-height: 1.4;
+            padding-right: 1.5rem;
+        }
+
+        .sample-arrow {
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            color: var(--text-muted);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .sample-box:hover .sample-arrow {
+            transform: translateX(3px);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            background: #040806;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer .brand {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .grid-two-col {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .hero h1 {
+                font-size: 2.75rem;
+            }
+        }
+        
+
+        @media (max-width: 640px) {
+            header nav {
+                display: none; /* Simplifies mobile presentation */
+            }
+            .hero {
+                padding: 8rem 1.5rem 4rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+            .info-card {
+                padding: 2rem 1.5rem;
+            }
+            .container {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb"></div>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                TexType<span>.</span>
+                <span class="logo-sub">\LaTeX</span>
+            </div>
+            <nav>
+                <a href="#about">What We Do</a>
+                <a href="#experience">Experience</a>
+                <a href="#samples">Work Samples</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">The International Standard for Typesetting</div>
+        <h1><span>Premium Mathematical & Scientific Typing Services</span></h1>
+        <p>Transforming complex manuscript drafts, formulas, and legacy documents into flawless, publisher-ready academic materials using the precision of LaTeX.</p>
+        <a href="#samples" class="cta-button">
+            Browse Sample Work
+            <svg style="margin-left:8px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+    </section>
+
+    <main class="container" id="about">
+        <div class="grid-two-col">
+            
+            <div class="info-card">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5v-15z"></path></svg>
+                    What We Do
+                </h2>
+                <p>We specialize strictly in the technical, meticulous demands of Mathematics and Science typography. From full-scale textbooks and complex examination papers to specialized classroom worksheets, we provide flawless styling. Every single piece of code is compiled natively inside <strong>LaTeX</strong>—the absolute gold standard globally for technical publication and mathematical rendering.</p>
+            </div>
+
+            <div class="info-card" id="experience">
+                <h2 class="section-title">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    Our Experience
+                </h2>
+                <p>Despite being a fast-growing venture, TexType has successfully commanded a comprehensive spectrum of STEM academic assets. Our production history stretches from advanced Mathematics Books designed for competitive job preparation, complex evaluation tests for coaching institutions, refined lecture notes, and classroom slide decks, all the way to rigorous, peer-reviewed Scientific Research Papers.</p>
+            </div>
+
+        </div>
+        
+        <div class="restrictions-panel">
+            <h3 class="restrictions-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+                Project Limitations & Scope
+            </h3>
+            <p>To ensure our absolute concentration on unyielding technical and scientific precision, TexType operates exclusively inside STEM materials. We do not accept projects involving fiction, political narratives, sensitive non-scientific topics, or layouts requiring human and animal illustrative graphics.</p>
+        </div>
+
+        <div class="samples-header" id="samples">
+            <h2>Our Typography Samples</h2>
+            <p>Click on any asset card below to evaluate our production outputs directly inside Google Drive.</p>
+        </div>
+
+        <div class="samples-grid">
+            
+            <a href="https://drive.google.com/file/d/1sATvrXve70WYxWDzJEpT9Q4PCAc9yRdT/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Textbook / Theory</div>
+                    <div class="sample-title">Chapter From a Book (Theory Layout)</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1edgZTeaijdS3BhXJ9GfKjgGShgKb-cLU/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Textbook / MCQs</div>
+                    <div class="sample-title">Chapter From a Book (Multiple Choice Layout)</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1ys_CWW-1L3sH4wc5rLARJ_NkNfNtQRvH/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Presentation Slides</div>
+                    <div class="sample-title">HSC Math Question Slides</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1N_tLf1yMUJJbI-m9rrmP1-rhNoWK5NvQ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Exam Assessment</div>
+                    <div class="sample-title">Class 06 Math Question Paper</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1nMu_gsjZg_yT1MKFmWFtePm-8Y-xohlh/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Reference Sheet</div>
+                    <div class="sample-title">Formula Sheet for Geometry & Area</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/1yEikqR6gun5W1d2wa2jAnd5Hf8SKzA-P/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Reference Sheet</div>
+                    <div class="sample-title">Formula Sheet for Algebra</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+            <a href="https://drive.google.com/file/d/19sYEkWc7y-sGR6p9D9svAPaxLidozdJw/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="sample-box">
+                <div>
+                    <div class="sample-tag">Reference Sheet</div>
+                    <div class="sample-title">Formula Sheet for Trigonometry</div>
+                </div>
+                <div class="sample-arrow">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 <span class="brand">TexType</span>. All rights reserved.</p>
+        <p style="font-size:0.8rem; opacity:0.6;">Professionally typeset via LaTeX configurations.</p>
+    </footer>
+
+</body>
+</html>
+
+
+
+        
